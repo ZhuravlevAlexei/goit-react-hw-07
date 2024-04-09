@@ -1,18 +1,17 @@
+import { toast } from 'react-hot-toast';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
-
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { nanoid } from '@reduxjs/toolkit';
 
 import {
   addContact,
   sortContacts,
   selectContacts,
 } from '../../redux/contactsSlice';
-import css from './ContactForm.module.css';
 
-import { toast } from 'react-hot-toast';
-import { nanoid } from '@reduxjs/toolkit';
+import css from './ContactForm.module.css';
 
 const formikValidationShema = Yup.object({
   name: Yup.string()
