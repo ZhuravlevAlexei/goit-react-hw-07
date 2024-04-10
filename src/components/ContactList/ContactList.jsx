@@ -11,9 +11,13 @@ const ContactList = () => {
 
   return (
     <ul className={css.contListArea}>
-      {filteredContacts.map(elm => {
-        return <Contact key={elm.id} deleteContact={deleteContact} {...elm} />;
-      })}
+      {filteredContacts.length === 0 && <p>No matces found in contacts...</p>}
+      {filteredContacts.length > 0 &&
+        filteredContacts.map(elm => {
+          return (
+            <Contact key={elm.id} deleteContact={deleteContact} {...elm} />
+          );
+        })}
     </ul>
   );
 };
