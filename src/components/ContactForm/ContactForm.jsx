@@ -1,16 +1,15 @@
 import { toast } from 'react-hot-toast';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
-import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { nanoid } from '@reduxjs/toolkit';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { addContact } from '../../redux/contactsOps';
 
 import {
-  addContact,
-  sortContacts,
+  // addContact,
+  // sortContacts,
   selectContacts,
 } from '../../redux/contactsSlice';
-
 import css from './ContactForm.module.css';
 
 const formikValidationShema = Yup.object({
@@ -38,11 +37,6 @@ const formikValidationShema = Yup.object({
 const ContactForm = () => {
   const contacts = useSelector(selectContacts);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(sortContacts());
-  }, [dispatch]);
-
   const handleSubmit = (values, actions) => {
     const tempName = values.name.toLowerCase();
     const foundContact = contacts.find(
@@ -54,13 +48,12 @@ const ContactForm = () => {
     }
 
     const newContact = {
-      id: nanoid(),
       name: values.name.trim(),
       number: values.number.trim(),
     };
 
     dispatch(addContact(newContact));
-    dispatch(sortContacts());
+    // dispatch(sortContacts());
 
     actions.resetForm();
   };

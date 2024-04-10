@@ -20,7 +20,7 @@ const Contact = ({ id, name, number, deleteContact }) => {
       <button
         className={css.delButton}
         type="button"
-        onClick={() => dispatch(deleteContact(id))}
+        onClick={() => dispatch(deleteContact(id))} // чому тут передаю цифру id, а contactSlice отримує об'єкт?
       >
         Delete
       </button>
