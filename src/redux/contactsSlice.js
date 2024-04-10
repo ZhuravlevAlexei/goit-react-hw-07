@@ -20,9 +20,9 @@ const contactsSlice = createSlice({
   name: 'contacts',
   initialState: initialState,
   reducers: {
-    sortContacts(state) {
-      state.items.sort((a, b) => a.name.localeCompare(b.name));
-    },
+    // sortContacts(state) {
+    //   state.items.sort((a, b) => a.name.localeCompare(b.name));
+    // },
   },
   extraReducers: builder => {
     builder
@@ -31,8 +31,7 @@ const contactsSlice = createSlice({
         state.loading = false;
         state.error = null;
         state.items = action.payload;
-        // state.items.sort((a, b) => a.name.localeCompare(b.name));
-        sortContacts(state); //чому не відпрацьовує це сортування из reducers?
+        state.items.sort((a, b) => a.name.localeCompare(b.name));
       })
       .addCase(fetchContacts.rejected, handleRejected)
       .addCase(addContact.pending, handlePending)
@@ -45,15 +44,15 @@ const contactsSlice = createSlice({
       .addCase(addContact.rejected, handleRejected)
       .addCase(deleteContact.pending, handlePending)
       .addCase(deleteContact.fulfilled, (state, action) => {
-        //чому тут в аction прилетає об'єкт, хоч відправляю з <Contact /> тільки id?
-        console.log('action: ', action);
+        //чому тут в аction.payload прилетає об'єкт, хоч відправляю з <Contact /> тільки id?
+        console.log('action payload: ', action.payload);
         state.loading = false;
         state.error = null;
 
-        const index = state.items.findIndex(
-          contact => contact.id === action.payload.id
-        );
-        state.items.splice(index, 1);
+        // const index = state.items.findIndex(
+        //   contact => contact.id === action.payload.id
+        // );
+        // state.items.splice(index, 1);
       })
       .addCase(deleteContact.rejected, handleRejected);
   },
