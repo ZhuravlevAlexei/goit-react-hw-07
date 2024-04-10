@@ -5,11 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { addContact } from '../../redux/contactsOps';
 
-import {
-  // addContact,
-  // sortContacts,
-  selectContacts,
-} from '../../redux/contactsSlice';
+import { selectContacts } from '../../redux/contactsSlice';
 import css from './ContactForm.module.css';
 
 const formikValidationShema = Yup.object({
@@ -53,7 +49,6 @@ const ContactForm = () => {
     };
 
     dispatch(addContact(newContact));
-    // dispatch(sortContacts());
 
     actions.resetForm();
   };
