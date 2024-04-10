@@ -44,15 +44,12 @@ const contactsSlice = createSlice({
       .addCase(addContact.rejected, handleRejected)
       .addCase(deleteContact.pending, handlePending)
       .addCase(deleteContact.fulfilled, (state, action) => {
-        //чому тут в аction.payload прилетає об'єкт, хоч відправляю з <Contact /> тільки id?
-        console.log('action payload: ', action.payload);
         state.loading = false;
         state.error = null;
-
-        // const index = state.items.findIndex(
-        //   contact => contact.id === action.payload.id
-        // );
-        // state.items.splice(index, 1);
+        const index = state.items.findIndex(
+          contact => contact.id === action.payload.id
+        );
+        state.items.splice(index, 1);
       })
       .addCase(deleteContact.rejected, handleRejected);
   },
